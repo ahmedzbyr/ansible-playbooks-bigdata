@@ -1,0 +1,43 @@
+#
+#-----------------------------
+# JDK SETUP
+#-----------------------------
+#
+
+- hosts: all
+  remote_user: root
+  roles:
+    - jdk
+
+
+#
+#-----------------------------
+# ZOOKEEPER CLUSTER SETUP
+#-----------------------------
+#
+
+- hosts: zookeepernodes
+  remote_user: root
+  roles:
+    - zookeeper_install_tarball
+
+#
+#-----------------------------
+# STORM CLUSTER SETUP
+#-----------------------------
+#
+
+- hosts: stormcluster
+  remote_user: root
+  roles:
+    - storm_commons_tarball
+
+- hosts: stormnimbusnodes
+  remote_user: root
+  roles:
+    - storm_nimbus
+
+- hosts: stormsupervisornodes
+  remote_user: root
+  roles:
+    - storm_supervisor

@@ -1,0 +1,14 @@
+---
+ - name: Downloading Kafka (Version 2.9.2).
+   get_url: url={{ hadoop_downloads['kafka_link'] }} dest={{ abs_download_path }}
+
+ - name: Downloading Zookeeper CDH5 (Version 3.4.5).
+   get_url: url={{ hadoop_downloads['cdh5_zookeeper_link'] }} dest={{ abs_download_path }}
+
+ - name: Downloading Hadoop CDH5 (Version 2.3.0).
+   get_url: url={{hadoop_downloads['cdh5_hadoop_link'] }} dest={{ abs_download_path }}
+
+ - name: Downloading Apache Storm (Version 0.9.4).
+   get_url: url={{hadoop_downloads['apache_strom_link'] }} dest={{ abs_download_path }}
+
+

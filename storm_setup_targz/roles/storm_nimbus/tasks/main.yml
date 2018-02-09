@@ -1,0 +1,14 @@
+---
+
+- name: Creating Directory for Storm.
+  file: path={{ storm_local_dir }} owner={{ storm_user }} group={{ storm_group }} state=directory
+
+- name: Creating Directory for Storm.
+  file: path={{ storm_log_dir }} owner={{ storm_user }} group={{ storm_group }} state=directory
+
+- name: Starting Nimbus.
+  command: sh {{ common['soft_link_base_path'] }}/storm/conf/start_nimbus.sh 
+  sudo: yes
+  sudo_user: "{{ storm_user }}"
+
+- include: start_ui.yml

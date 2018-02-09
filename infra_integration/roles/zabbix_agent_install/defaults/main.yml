@@ -1,0 +1,4 @@
+---
+
+copy_location: /tmp/zabbix_agent
+zabbix_server_ip: 10.10.18.99

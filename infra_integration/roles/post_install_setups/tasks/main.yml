@@ -1,0 +1,4 @@
+---
+
+- include: create_hadoop_user.yml
+- include: setup_storm_scripts.yml

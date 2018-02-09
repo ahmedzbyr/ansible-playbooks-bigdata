@@ -1,0 +1,32 @@
+- hosts: preprod
+  remote_user: root
+  roles:
+    - commons
+    - ssh_known_hosts
+    - jdk
+
+- hosts: zookeepernodes
+  remote_user: root
+  roles:
+    - zookeeper_install_tarball
+
+- hosts: kafkanodes
+  remote_user: root
+  roles:
+    - kafka_install_tarball
+
+- hosts: stormcluster
+  remote_user: root
+  roles:
+    - storm_commons_tarball
+
+- hosts: stormnimbusnodes
+  remote_user: root
+  roles:
+    - storm_nimbus
+
+- hosts: stormsupervisornodes
+  remote_user: root
+  roles:
+    - storm_supervisor
+

@@ -1,0 +1,11 @@
+---
+
+  - name: Copy and UnArchive the Package in Destination Server.
+    unarchive: creates={{ common['install_base_path'] }}/{{ storm_version }} src=file_archives/{{ storm_version }}.tar.gz  dest={{ common['install_base_path'] }} owner={{ storm_user }} group={{ storm_group }} 
+  
+  - name: Change Directory Permissions.
+    file: path={{ common['install_base_path'] }}/{{ storm_version }} owner={{ storm_user }} group={{ storm_group }} recurse=yes
+  
+  - name: Creating a Symbolic Link in {{ common['install_base_path'] }}/storm.
+    file: src={{ common['install_base_path'] }}/{{ storm_version }} path={{ common['soft_link_base_path'] }}/storm state=link owner={{ storm_user }} group={{ storm_group }}
+    

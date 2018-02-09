@@ -1,0 +1,7 @@
+---
+
+- name: Starting UI Services.
+  command: sh {{ common['soft_link_base_path'] }}/storm/conf/start_ui.sh
+  sudo: yes
+  sudo_user: "{{ storm_user }}"
+ 

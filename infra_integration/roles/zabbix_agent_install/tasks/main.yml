@@ -1,0 +1,22 @@
+---
+
+- name: Zabbix Agent | Create Remote Directory.
+  file: path={{ copy_location }} state=directory
+
+- name: Zabbix Agent | Copy Files to Remote Server.
+  copy: src=file_archives/zabbix_rpms/{{ item }} dest={{ copy_location }}/
+  with_items:
+    - zabbix-2.4.3-1.el6.x86_64.rpm
+    - zabbix-agent-2.4.3-1.el6.x86_64.rpm
+
+- name: Zabbix Agent | Install
+  command: creates=/etc/zabbix/zabbix_agentd.conf  rpm -ivh {{ copy_location }}/{{ item }}
+  with_items:
+    - zabbix-2.4.3-1.el6.x86_64.rpm
+    - zabbix-agent-2.4.3-1.el6.x86_64.rpm
+
+- name: Zabbix Agent | Update `zabbix_agent.conf`
+  template: src=zabbix_agentd.conf dest=/etc/zabbix/zabbix_agentd.conf 
+
+- name: Zabbix Agent | Starting Service.
+  service: name=zabbix-agent state=started enabled=yes

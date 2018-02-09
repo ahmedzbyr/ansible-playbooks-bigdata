@@ -1,0 +1,11 @@
+---
+  - name: Creating Directory for `scripts`.
+    file: path=/home/{{ storm_user }}/scripts/ state=directory owner={{ storm_user }} group={{ storm_group }}
+
+  - name: Setting Storm Scrips 
+    template: src={{ item }} dest=/home/{{ storm_user }}/scripts/ owner={{ storm_user }} group={{ storm_group }} mode=0777
+    with_items:
+      - mvworkdir.sh
+      - renamedir.sh 
+      - killtopology.sh 
+

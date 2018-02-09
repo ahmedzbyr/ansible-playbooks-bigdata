@@ -1,0 +1,50 @@
+---
+
+- hosts: namenodes
+  remote_user: root
+  tasks:
+    - name: Stop all Services.
+      command: sh {{ common['install_base_path'] }}/hadoop/sbin/stop-yarn.sh
+      sudo: yes
+      sudo_user: "{{ hadoop_user }}"
+
+    - name: Stop DFS. Services.
+      command: sh {{ common['install_base_path'] }}/hadoop/sbin/stop-dfs.sh 
+      sudo: yes
+      sudo_user: "{{ hadoop_user }}"
+
+- hosts: resourcemanager
+  remote_user: root
+  tasks:
+    - name: Stop Resource Manager.
+      command: sh {{ common['install_base_path'] }}/hadoop/sbin/yarn-daemon.sh stop resourcemanager
+      sudo: yes
+      sudo_user: "{{ hadoop_user }}"
+  
+    - name: Stop Job History Server.
+      command: sh {{ common['install_base_path'] }}/hadoop/sbin/mr-jobhistory-daemon.sh stop historyserver
+      sudo: yes
+      sudo_user: "{{ hadoop_user }}"
+
+- hosts: hadoopcluster
+  remote_user: root
+  tasks:
+    - name: Remove Directories.
+      command: rm -rf {{ common['install_base_path'] }}/hadoop {{ common['install_base_path'] }}/hadoop-2.3.0-cdh5.1.2 
+
+    - name: Remove Storage Directories.
+      command: rm -rf /data{{ item.base }}/{{ item.subdir }}
+      with_items:
+        - { base: '1', subdir: 'hadoop' }
+        - { base: '2', subdir: 'hadoop' }
+        - { base: '3', subdir: 'hadoop' }
+        - { base: '4', subdir: 'hadoop' }
+        - { base: '5', subdir: 'hadoop' }
+        - { base: '6', subdir: 'hadoop' }
+        - { base: '1', subdir: 'yarn' }
+        - { base: '2', subdir: 'yarn' }
+        - { base: '3', subdir: 'yarn' }
+        - { base: '4', subdir: 'yarn' }
+        - { base: '5', subdir: 'yarn' }
+        - { base: '6', subdir: 'yarn' }
+  

@@ -1,0 +1,19 @@
+[zookeepernodes]
+10.10.18.11 zookeeper_id=1
+10.10.18.12 zookeeper_id=2
+10.10.18.13 zookeeper_id=3
+
+#
+# storm cluster
+#
+
+[stormnimbusnodes]
+10.10.18.11
+
+[stormsupervisornodes]
+10.10.18.12
+10.10.18.13
+
+[stormcluster:children]
+stormnimbusnodes
+stormsupervisornodes

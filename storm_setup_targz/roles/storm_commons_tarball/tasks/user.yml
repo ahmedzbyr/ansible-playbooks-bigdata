@@ -1,0 +1,7 @@
+---
+  # Password Generated using python command below.
+  #     python -c "from passlib.hash import sha512_crypt; import getpass; print sha512_crypt.encrypt(getpass.getpass())"
+  # Current `hdadmin` password is = hdadmin@123
+
+  - name: Create a User `{{ storm_user }}` for all our Hadoop Modules.
+    user: name={{ storm_user }} password={{ storm_password }}

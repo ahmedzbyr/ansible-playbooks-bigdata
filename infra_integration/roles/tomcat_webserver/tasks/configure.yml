@@ -1,0 +1,14 @@
+---
+
+  - name: Updating Configuration File in Tomcat.
+    template: src={{ item }} dest={{ common['soft_link_base_path'] }}/tomcat/conf/{{ item }} owner={{ tomcat_user }} group={{ tomcat_group }}
+    with_items:
+      - server.xml
+      - logging.properties
+      - tomcat-users.xml
+
+  - name: Updating JVMParameter and Creating Starter Script. 
+    template: src={{ item }} dest={{ common['soft_link_base_path'] }}/tomcat/bin/{{ item }} owner={{ tomcat_user }} group={{ tomcat_group }} mode=0777
+    with_items:
+      - setenv.sh
+      - tomcat-starter.sh

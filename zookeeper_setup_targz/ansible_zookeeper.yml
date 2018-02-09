@@ -1,0 +1,13 @@
+---
+
+#
+#-----------------------------
+# ZOOKEEPER CLUSTER SETUP
+#-----------------------------
+#
+
+- hosts: zookeepernodes
+  remote_user: root
+  roles:
+    - jdk
+    - zookeeper_install_tarball

@@ -1,0 +1,6 @@
+---
+
+- name: Starting `http2kafka`.
+  command: sh {{ common['soft_link_base_path'] }}/http2kafka/running.sh
+  #sudo: yes
+  #sudo_user: kafkaadmin

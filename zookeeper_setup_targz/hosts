@@ -1,0 +1,4 @@
+[zookeepernodes]
+10.10.18.10 zookeeper_id=1
+10.10.18.12 zookeeper_id=2
+10.10.18.13 zookeeper_id=3

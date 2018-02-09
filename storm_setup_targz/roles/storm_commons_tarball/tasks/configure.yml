@@ -1,0 +1,11 @@
+---
+- name: Apache Storm | Update configuration
+  template: src={{ item }} dest={{ common['soft_link_base_path'] }}/storm/conf/ owner={{ storm_user }} group={{ storm_group }} mode=0644
+  with_items:
+    - storm.yaml
+    - start_supervisor.sh
+    - start_nimbus.sh
+    - start_ui.sh
+    - stop_ui.sh
+    - stop_nimbus.sh
+    - stop_supervisor.sh

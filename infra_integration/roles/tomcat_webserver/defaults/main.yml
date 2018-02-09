@@ -1,0 +1,8 @@
+---
+
+tomcat_version: apache-tomcat-7.0.61
+
+tomcat_web_port: 8080
+tomcat_shutdown_port: 8005
+tomcat_ajp_port: 8009
+tomcat_ssl_port: 8443

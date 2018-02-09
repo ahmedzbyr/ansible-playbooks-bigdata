@@ -1,0 +1,11 @@
+---
+  - name: UnArchive the Package in Destination Server.
+    unarchive: creates={{ common['install_base_path'] }}/{{ tomcat_version }} src=file_archives/{{ tomcat_version }}.tar.gz dest={{ common['install_base_path'] }} 
+
+  - name: Change Directory Permissions.
+    file: path={{ common['install_base_path'] }}/{{ tomcat_version }} owner={{ tomcat_user }} group={{ tomcat_group }} recurse=yes
+
+  - name: Creating a Symbolic Link in /opt/tomcat.
+    file: src={{ common['install_base_path'] }}/{{ tomcat_version }} path={{ common['soft_link_base_path'] }}/tomcat state=link owner={{ tomcat_user }} group={{ tomcat_group }}
+
+  

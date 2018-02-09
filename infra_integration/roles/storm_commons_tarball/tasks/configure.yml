@@ -1,0 +1,23 @@
+---
+- name: Apache Storm | Update configuration
+  template: src={{ item }} dest={{ common['soft_link_base_path'] }}/storm/conf/ owner={{ storm_user }} group={{ storm_group }} mode=0644
+  with_items:
+    - storm.yaml
+    - start_supervisor.sh
+    - start_nimbus.sh
+    - start_ui.sh
+    - stop_ui.sh
+    - stop_nimbus.sh
+    - stop_supervisor.sh
+    - events.props
+    - TopologyConf_prod.props
+
+- name: Apache Storm | Update configuration `kill script`
+  template: src=killtopology.sh dest={{ common['soft_link_base_path'] }}/storm/bin/ owner={{ storm_user }} group={{ storm_group }} mode=0777
+
+- name: Apache Storm | Copy jar file to `bin` location.
+  copy: src=file_archives/stormdev.jar dest={{ common['soft_link_base_path'] }}/storm/bin/ owner={{ storm_user }} group={{ storm_group }}
+
+- name: Apache Storm | Update jars in `lib`.
+  unarchive: src=file_archives/jars-{{ storm_version }}.tar.gz  dest={{ common['install_base_path'] }}/storm/lib/ owner={{ storm_user }} group={{ storm_group }}
+

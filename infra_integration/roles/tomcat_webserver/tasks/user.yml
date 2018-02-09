@@ -1,0 +1,6 @@
+---
+
+  - name: Create a User `{{ tomcat_user }}` for all our Webserver.
+    user: name={{ tomcat_user }} password=$6$rounds=40000$1qjG/hovLZOkcerH$CK4Or3w8rR3KabccowciZZUeD.nIwR/VINUa2uPsmGK/2xnmOt80TjDwbof9rNvnYY6icCkdAR2qrFquirBtT1
+
+

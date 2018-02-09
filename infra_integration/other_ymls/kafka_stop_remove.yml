@@ -1,0 +1,18 @@
+---
+- hosts: kafkanodes
+  remote_user: root
+  tasks:
+#
+#  - name: Stop Kafka
+#    command: sh /opt/kafka/bin/zookeeper-server-stop.sh
+#    sudo: yes
+#    sudo_user: hdadmin
+#
+#  - name: Stop Kafka
+#    command: killall -9 Kafka
+#    sudo: yes
+#    sudo_user: hdadmin
+#
+  - name: Remove Kafka Directories
+    command: rm -rf {{ common['soft_link_base_path'] }}/kafka {{ common['install_base_path']}}/kafka_2.9.2-0.8.2.1 /data1/ansible/kafka
+

@@ -1,0 +1,12 @@
+---
+
+  - name: Updating Configuration File in kafka.
+    template: src={{ item }} dest={{ common['soft_link_base_path'] }}/http2kafka/{{ item }} owner={{ kafka_user }} group={{ kafka_group }}
+    with_items:
+      - running.sh
+      - init.script
+      - http2Kafka.ini
+
+  - name: Update service.
+    template: src=init.script dest=/etc/rc.d/init.d/http2kafka mode=0755 owner=root group=root
+

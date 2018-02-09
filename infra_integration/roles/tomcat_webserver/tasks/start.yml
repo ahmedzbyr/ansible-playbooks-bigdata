@@ -1,0 +1,4 @@
+---
+
+- name: Starting Tomcat server.
+  command: sh {{ common['soft_link_base_path'] }}/tomcat/bin/tomcat-starter.sh  

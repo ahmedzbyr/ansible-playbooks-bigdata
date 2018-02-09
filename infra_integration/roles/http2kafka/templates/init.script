@@ -1,0 +1,65 @@
+#!/bin/bash
+#
+#       /etc/rc.d/init.d/<servicename>
+#
+#       <description of the *service*>
+#       <any general comments about this init script>
+#
+# <tags -- see below for tag definitions.  *Every line* from the top
+#  of the file to the end of the tags section must begin with a #
+#  character.  After the tags section, there should be a blank line.
+#  This keeps normal comments in the rest of the file from being
+#  mistaken for tags, should they happen to fit the pattern.>
+
+# Source function library.
+. /etc/init.d/functions
+
+#<define any local shell functions used by the code that follows>
+RETVAL=0
+prog="http2kafka"
+LOCKFILE=/var/lock/subsys/$prog
+
+
+start() {
+        echo -n "Starting $prog: "
+        sh {{ common['soft_link_base_path'] }}/http2KafkaLibUV/running.sh 
+	RETVAL=$?
+        touch /var/lock/subsys/$prog
+        return $RETVAL
+}
+
+stop() {
+        echo -n "Shutting down $prog . "
+        killall -9 http2KafkaLibUV
+	RETVAL=$?
+        rm -f /var/lock/subsys/$prog
+        return $RETVAL
+}
+
+status() {
+        echo -n "Checking $prog status: "
+        ps -ef | grep http2KafkaLibUV
+        RETVAL=$?
+        return $RETVAL
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    status)
+	status
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    *)
+        echo "Usage: <servicename> {start|stop|status|restart}"
+        exit 1
+        ;;
+esac
+exit $?

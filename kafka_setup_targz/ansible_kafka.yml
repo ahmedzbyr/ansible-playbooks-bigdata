@@ -1,0 +1,33 @@
+#
+#-----------------------------
+# JDK SETUP
+#-----------------------------
+#
+
+- hosts: all
+  remote_user: root
+  roles:
+    - jdk
+
+
+#
+#-----------------------------
+# ZOOKEEPER CLUSTER SETUP
+#-----------------------------
+#
+
+- hosts: zookeepernodes
+  remote_user: root
+  roles:
+    - zookeeper_install_tarball
+
+#
+#-----------------------------
+# KAFKA CLUSTER SETUP
+#-----------------------------
+#
+
+- hosts: kafkanodes
+  remote_user: root
+  roles:
+    - kafka_install_tarball

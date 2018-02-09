@@ -1,0 +1,58 @@
+########## Kafka zookeeper details ###########
+
+##VM
+#ZK_HOSTS=10.128.23.252:2181,10.128.26.90:2181,10.128.26.94:2181
+
+##Phy
+ZK_HOSTS={% for host in groups['zookeepernodes'] %}{{ hostvars[host]['inventory_hostname'] }}:2181{% if not loop.last %},{% endif %}{% endfor %}
+
+
+############ Kafka details ###############
+BEGIN_TOPIC=B
+END_TOPIC=E
+CRASH_TOPIC=error
+EVENT_TOPIC=event
+
+
+###physical server ends with 0
+BEGIN_ID=ahmedbeginid01
+END_ID=ahmedendid02
+CRASH_ID=ahmedcrashid03
+EVENT_ID=ahmedeventid04
+
+###
+BEGIN_READERS=1
+END_READERS=1
+CRASH_READERS=1
+EVENT_READERS=1
+
+##
+BEGIN_WRITERS=1
+END_WRITERS=1
+CRASH_WRITERS=1
+EVENT_WRITERS=1
+
+##
+SIGNAL_INTERVAL=1800000
+
+###EVENTS DETAILS###
+FS_DEFAULT_NAME=hdfs://{{ groups['namenodes'][0] }}:9000
+SESSION_BASE_DIR=/user/{{ storm_user }}/sessions/data
+EVENTS_CONFIG_FILE={{ common['soft_link_base_path'] }}/storm/conf/events.props
+EVENTS_DEFAULT_VALUE=default
+EVENTS_KEY_FIELD=_key
+
+########## storm details ##############
+TOPOLOGY_NAME={{ storm_topology_name }}
+
+######### MONGO db details ############
+MONGO_SERVER=10.130.18.31
+MONGO_PORT=27017
+MONGO_DB=jma
+LOC_COLLECTION=geo
+IP_COLLECTION=ip2city
+MONGO_MAX_DISTANCE=100
+
+######### USER VALIDATION ############
+CHECK_BLACKLIST_USERS=T
+BLACK_LISTED_USERS=amd,kiran,james,hhkaf,ahmd,zbyr

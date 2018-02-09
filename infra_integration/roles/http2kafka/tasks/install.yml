@@ -1,0 +1,14 @@
+---
+
+  - name: Create a User `"{{ kafka_user }}"` for all our Hadoop Modules.
+    user: name={{ kafka_user }} password=$6$rounds=40000$1qjG/hovLZOkcerH$CK4Or3w8rR3KabccowciZZUeD.nIwR/VINUa2uPsmGK/2xnmOt80TjDwbof9rNvnYY6icCkdAR2qrFquirBtT1
+
+  - name: Copy and UnArchive the Package in Destination Server.
+    unarchive: creates={{ common['install_base_path'] }}/{{ http2kafka_version }} src=file_archives/{{ http2kafka_version }}.tgz dest={{ common['install_base_path'] }} owner={{ kafka_user }} group={{ kafka_group }}
+
+  - name: Change Directory Permissions.
+    file: path={{ common['install_base_path'] }}/{{ http2kafka_version }} owner={{ kafka_user }} group={{ kafka_group }} recurse=yes
+
+  - name: Creating a Symbolic Link in {{ common['install_base_path'] }}/http2kafka.
+    file: src={{ common['install_base_path'] }}/{{ http2kafka_version }} path={{ common['soft_link_base_path'] }}/http2kafka state=link owner={{ kafka_user }} group={{ kafka_group }}
+

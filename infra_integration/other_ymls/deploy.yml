@@ -1,0 +1,34 @@
+#- hosts: 10.130.18.91
+#  remote_user: root
+#  roles:
+#    - common_downloads
+#
+#- hosts: zookeepers
+#  remote_user: root
+#  roles:
+#    - zookeeper_install_tarball
+#
+#- hosts: kafka
+#  remote_user: root
+#  roles:
+#    - kafka_install_tarball
+#
+#
+#- hosts: 10.130.18.91
+#  remote_user: root
+#  roles:
+#    - jdk
+#
+#- hosts: hadoop-node
+#  remote_user: root
+#  roles:
+#    - cdh5_hadoop_commons_tarball
+#    - cdh5_hadoop_namenode_active
+#    - cdh5_hadoop_sec_namenode
+#    - cdh5_hadoop_resourcemgr
+#    - cdh5_hadoop_datanode
+
+- hosts: ssh-test
+  remote_user: root
+  roles:
+    - ssh_known_hosts

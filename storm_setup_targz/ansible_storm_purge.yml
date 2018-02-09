@@ -1,0 +1,71 @@
+#
+#-----------------------------
+# STORM CLUSTER STOP
+#-----------------------------
+#
+
+
+- hosts: stormsupervisornodes
+  remote_user: root
+  tasks:
+
+    - name: Stop Supervisors.
+      command: sh {{ common['soft_link_base_path'] }}/storm/conf/stop_supervisor.sh
+      sudo: yes
+      sudo_user: "{{ storm_user }}"
+
+    - name: KILL supervisor.
+      raw: if [ `jps | grep supervisor | xargs | awk '{ print $1}'` ]; then kill -9 `jps | grep supervisor | xargs | awk '{ print $1}'`; fi;
+      sudo: yes
+      sudo_user: "{{ storm_user }}"
+
+- hosts: stormnimbusnodes
+  remote_user: root
+  tasks:
+
+    - name: Stop UI.
+      command: sh {{ common['soft_link_base_path'] }}/storm/conf/stop_ui.sh
+      sudo: yes
+      sudo_user: "{{ storm_user }}"
+
+    - name: Stop Nimbus.
+      command: sh {{ common['soft_link_base_path'] }}/storm/conf/stop_nimbus.sh
+      sudo: yes
+      sudo_user: "{{ storm_user }}"
+
+    - name: KILL nimbus.
+      raw: if [ `jps | grep nimbus | xargs | awk '{ print $1}'` ]; then kill -9 `jps | grep nimbus | xargs | awk '{ print $1}'`; fi;
+      sudo: yes
+      sudo_user: "{{ storm_user }}"
+
+
+    - name: KILL ui.
+      raw: if [ `jps | grep core | xargs | awk '{ print $1}'` ]; then kill -9 `jps | grep core | xargs | awk '{ print $1}'`; fi;
+      sudo: yes
+      sudo_user: "{{ storm_user }}"
+
+- hosts: stormcluster
+  remote_user: root
+  tasks:
+    - name: Remove Storm Directories.
+      command: rm -rf {{ common['soft_link_base_path'] }}/storm {{ common['install_base_path'] }}/{{ storm_version }} {{ storm_local_dir }} {{ storm_log_dir }}
+
+
+#
+#-----------------------------
+# ZOOKEEPER CLUSTER STOP
+#-----------------------------
+#
+
+- hosts: zookeepernodes
+  remote_user: root
+  tasks:
+
+  - name: Stop Zookeeper
+    command: sh {{ common['soft_link_base_path'] }}/zookeeper/bin/zkServer.sh stop
+    sudo: yes
+    sudo_user: "{{ zookeeper_user }}"
+
+  - name: Remove Zookeeper Directories.
+    command: rm -rf {{ common['soft_link_base_path'] }}/zookeeper {{ common['install_base_path'] }}/{{ zookeeper_version }} {{ zookeeper_data_store }} {{ zookeeper_logging }}
+

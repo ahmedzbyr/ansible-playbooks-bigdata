@@ -1,0 +1,4 @@
+---
+# Static path for Hadoop 
+#
+hadoop_version: hadoop-2.3.0-cdh5.1.2

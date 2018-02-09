@@ -1,0 +1,8 @@
+---
+hadoop_downloads: 
+  kafka_link: 'http://apache.mirrors.lucidnetworks.net/kafka/0.8.2.1/kafka_2.9.2-0.8.2.1.tgz' 
+  cdh5_zookeeper_link: 'http://archive.cloudera.com/cdh5/cdh/5/zookeeper-3.4.5-cdh5.1.2.tar.gz'
+  cdh5_hadoop_link: 'http://archive.cloudera.com/cdh5/cdh/5/hadoop-2.3.0-cdh5.1.2.tar.gz'
+  apache_strom_link: 'http://apache.cs.utah.edu/storm/apache-storm-0.9.4/apache-storm-0.9.4.tar.gz'
+
+abs_download_path: '/root/ansible_scripts/role_based_ansible/file_archives'

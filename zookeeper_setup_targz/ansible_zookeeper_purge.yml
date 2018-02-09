@@ -1,0 +1,15 @@
+---
+
+
+- hosts: zookeepernodes
+  remote_user: root
+  tasks:
+
+  - name: Stop Zookeeper
+    command: sh {{ common['soft_link_base_path'] }}/zookeeper/bin/zkServer.sh stop
+    sudo: yes
+    sudo_user: "{{ zookeeper_user }}"
+
+  - name: Remove Zookeeper Directories.
+    command: rm -rf {{ common['soft_link_base_path'] }}/zookeeper {{ common['install_base_path'] }}/{{ zookeeper_version }} {{ zookeeper_data_store }} {{ zookeeper_logging }}
+
