@@ -6,7 +6,7 @@
 
 ---
 
-###Table of Contents
+### Table of Contents
 
 * <a href="#GetthescriptfromGithub">Get the script from Github.</a>
 * <a href="#Beforewestart">Before we start.</a>
